@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { GraduationCap, Menu, X, Calendar, Home, Info, BookOpen, Calculator, Camera, Mail, User, Search, ChevronDown, Globe, Sun, Moon } from "lucide-react";
+import { GraduationCap, Menu, X, Calendar, Home, Info, BookOpen, Calculator, Camera, Mail, User, Search, ChevronDown, Globe, Sun, Moon, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
@@ -37,6 +37,7 @@ export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [isNavCollapsed, setIsNavCollapsed] = useState(false);
   const [location] = useLocation();
 
   useEffect(() => {
@@ -101,21 +102,129 @@ export default function Navigation() {
             </Link>
           </motion.div>
           
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation with Collapse Toggle */}
           <div className="hidden lg:flex items-center space-x-2">
-            {location === "/" ? (
-              <>
-                <NavButton icon={Home} label="Início" onClick={() => scrollToSection("home")} />
-                <NavButton icon={Info} label="Sobre" onClick={() => scrollToSection("about")} />
-                <NavButton icon={BookOpen} label="Programas" onClick={() => scrollToSection("programs")} />
-                <NavButton icon={Calculator} label="Mensalidades" onClick={() => scrollToSection("calculator")} />
-                <NavButton icon={Camera} label="Tour Virtual" onClick={() => scrollToSection("tour")} />
-                <NavButton icon={Mail} label="Contato" onClick={() => scrollToSection("contact")} />
-              </>
-            ) : (
-              <Link href="/">
-                <NavButton icon={Home} label="← Início" />
-              </Link>
+            {/* Navigation Toggle Button */}
+            <motion.button
+              onClick={() => setIsNavCollapsed(!isNavCollapsed)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors mr-2"
+              title={isNavCollapsed ? "Mostrar navegação" : "Ocultar navegação"}
+            >
+              <motion.div
+                animate={{ rotate: isNavCollapsed ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {isNavCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+              </motion.div>
+            </motion.button>
+
+            {/* Navigation Links */}
+            <AnimatePresence>
+              {!isNavCollapsed && (
+                <motion.div 
+                  initial={{ opacity: 0, width: 0 }}
+                  animate={{ opacity: 1, width: "auto" }}
+                  exit={{ opacity: 0, width: 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="flex items-center space-x-2 overflow-hidden"
+                >
+                  {location === "/" ? (
+                    <>
+                      <NavButton icon={Home} label="Início" onClick={() => scrollToSection("home")} />
+                      <NavButton icon={Info} label="Sobre" onClick={() => scrollToSection("about")} />
+                      <NavButton icon={BookOpen} label="Programas" onClick={() => scrollToSection("programs")} />
+                      <NavButton icon={Calculator} label="Mensalidades" onClick={() => scrollToSection("calculator")} />
+                      <NavButton icon={Camera} label="Tour Virtual" onClick={() => scrollToSection("tour")} />
+                      <NavButton icon={Mail} label="Contato" onClick={() => scrollToSection("contact")} />
+                    </>
+                  ) : (
+                    <Link href="/">
+                      <NavButton icon={Home} label="← Início" />
+                    </Link>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Compact Navigation (when collapsed) - Show only icons */}
+            {isNavCollapsed && (
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="flex items-center space-x-1"
+              >
+                {location === "/" ? (
+                  <>
+                    <motion.button
+                      onClick={() => scrollToSection("home")}
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:text-angola-blue dark:hover:text-china-yellow hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+                      title="Início"
+                    >
+                      <Home className="h-4 w-4" />
+                    </motion.button>
+                    <motion.button
+                      onClick={() => scrollToSection("about")}
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:text-angola-blue dark:hover:text-china-yellow hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+                      title="Sobre"
+                    >
+                      <Info className="h-4 w-4" />
+                    </motion.button>
+                    <motion.button
+                      onClick={() => scrollToSection("programs")}
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:text-angola-blue dark:hover:text-china-yellow hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+                      title="Programas"
+                    >
+                      <BookOpen className="h-4 w-4" />
+                    </motion.button>
+                    <motion.button
+                      onClick={() => scrollToSection("calculator")}
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:text-angola-blue dark:hover:text-china-yellow hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+                      title="Mensalidades"
+                    >
+                      <Calculator className="h-4 w-4" />
+                    </motion.button>
+                    <motion.button
+                      onClick={() => scrollToSection("tour")}
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:text-angola-blue dark:hover:text-china-yellow hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+                      title="Tour Virtual"
+                    >
+                      <Camera className="h-4 w-4" />
+                    </motion.button>
+                    <motion.button
+                      onClick={() => scrollToSection("contact")}
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:text-angola-blue dark:hover:text-china-yellow hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+                      title="Contato"
+                    >
+                      <Mail className="h-4 w-4" />
+                    </motion.button>
+                  </>
+                ) : (
+                  <Link href="/">
+                    <motion.button
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:text-angola-blue dark:hover:text-china-yellow hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+                      title="← Início"
+                    >
+                      <Home className="h-4 w-4" />
+                    </motion.button>
+                  </Link>
+                )}
+              </motion.div>
             )}
           </div>
 
