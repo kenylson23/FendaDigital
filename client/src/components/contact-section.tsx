@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
+import { useLanguage } from "@/contexts/language-context";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,6 +12,8 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 
 export default function ContactSection() {
+  const { t } = useLanguage();
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -106,9 +109,9 @@ export default function ContactSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold text-white mb-4">Entre em Contato</h2>
+          <h2 className="text-4xl font-bold text-white mb-4">{t('contact.title')}</h2>
           <p className="text-xl text-blue-200">
-            Estamos aqui para responder às suas perguntas e ajudar no seu percurso educacional.
+            {t('contact.subtitle')}
           </p>
         </motion.div>
         

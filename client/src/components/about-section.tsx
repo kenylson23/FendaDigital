@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { Globe, Award, Users } from "lucide-react";
+import { useLanguage } from "@/contexts/language-context";
 
 export default function AboutSection() {
+  const { t } = useLanguage();
   return (
     <section id="about" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -11,10 +13,9 @@ export default function AboutSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Sobre Nossa Escola</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">{t('about.title')}</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Uma instituição pioneira no intercâmbio educacional Angola-China, 
-            oferecendo educação de qualidade mundial com perspectiva multicultural.
+            {t('about.description')}
           </p>
         </motion.div>
         
@@ -42,10 +43,9 @@ export default function AboutSection() {
                 <Globe className="text-white" size={24} />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">Intercâmbio Cultural</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('about.intercambio')}</h3>
                 <p className="text-gray-600">
-                  Programa único de intercâmbio que conecta estudantes angolanos e chineses, 
-                  promovendo compreensão cultural e colaboração internacional.
+                  {t('about.intercambio_desc')}
                 </p>
               </div>
             </div>
@@ -55,10 +55,9 @@ export default function AboutSection() {
                 <Award className="text-white" size={24} />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">Excelência Acadêmica</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('about.excelencia')}</h3>
                 <p className="text-gray-600">
-                  Currículo internacional reconhecido, preparando estudantes para universidades 
-                  de prestígio em Angola, China e no mundo.
+                  {t('about.excelencia_desc')}
                 </p>
               </div>
             </div>
@@ -68,10 +67,9 @@ export default function AboutSection() {
                 <Users className="text-white" size={24} />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">Comunidade Diversa</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('about.comunidade')}</h3>
                 <p className="text-gray-600">
-                  Ambiente inclusivo que celebra a diversidade cultural e promove o 
-                  desenvolvimento integral dos nossos estudantes.
+                  {t('about.comunidade_desc')}
                 </p>
               </div>
             </div>

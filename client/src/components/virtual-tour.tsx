@@ -1,29 +1,32 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/language-context";
 import { Play, Presentation, FlaskConical, Book, Dumbbell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function VirtualTour() {
+  const { t } = useLanguage();
+  
   const [currentLocation, setCurrentLocation] = useState("classroom");
   
   const locations = {
     classroom: {
-      name: "Sala de Aula Principal",
+      name: t('tour.classroom'),
       image: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&h=800",
       icon: Presentation
     },
     laboratory: {
-      name: "Laboratório de Ciências",
+      name: t('tour.laboratory'),
       image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&h=800",
       icon: FlaskConical
     },
     library: {
-      name: "Biblioteca Central",
+      name: t('tour.library'),
       image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&h=800",
       icon: Book
     },
     sports: {
-      name: "Centro Desportivo",
+      name: t('tour.sports'),
       image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&h=800",
       icon: Dumbbell
     }
@@ -45,9 +48,9 @@ export default function VirtualTour() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Tour Virtual 360°</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">{t('tour.title')}</h2>
           <p className="text-xl text-gray-600">
-            Explore nossa escola virtualmente e conheça nossas instalações de perto.
+            {t('tour.subtitle')}
           </p>
         </motion.div>
         

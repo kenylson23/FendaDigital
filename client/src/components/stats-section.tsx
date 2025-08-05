@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/contexts/language-context";
 
 export default function StatsSection() {
+  const { t } = useLanguage();
+  
   const [counters, setCounters] = useState({
     students: 0,
     teachers: 0,
@@ -65,7 +68,7 @@ export default function StatsSection() {
             className="text-white"
           >
             <div className="text-4xl font-bold mb-2">{counters.students}</div>
-            <p className="text-blue-200">Estudantes</p>
+            <p className="text-blue-200">{t('stats.estudantes')}</p>
           </motion.div>
           
           <motion.div 
@@ -75,7 +78,7 @@ export default function StatsSection() {
             className="text-white"
           >
             <div className="text-4xl font-bold mb-2">{counters.teachers}</div>
-            <p className="text-blue-200">Professores</p>
+            <p className="text-blue-200">{t('stats.professores')}</p>
           </motion.div>
           
           <motion.div 
@@ -85,7 +88,7 @@ export default function StatsSection() {
             className="text-white"
           >
             <div className="text-4xl font-bold mb-2">{counters.experience}</div>
-            <p className="text-blue-200">Anos de Experiência</p>
+            <p className="text-blue-200">{t('stats.programas')}</p>
           </motion.div>
           
           <motion.div 
@@ -95,7 +98,7 @@ export default function StatsSection() {
             className="text-white"
           >
             <div className="text-4xl font-bold mb-2">{counters.approval}%</div>
-            <p className="text-blue-200">Taxa de Aprovação</p>
+            <p className="text-blue-200">{t('stats.parceiros')}</p>
           </motion.div>
         </div>
       </div>

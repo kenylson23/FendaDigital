@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
+import { useLanguage } from "@/contexts/language-context";
 import { Calculator, Save, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,6 +14,8 @@ import { apiRequest } from "@/lib/queryClient";
 import { type TuitionResult } from "@shared/schema";
 
 export default function TuitionCalculator() {
+  const { t } = useLanguage();
+  
   const [formData, setFormData] = useState({
     educationLevel: "",
     paymentMode: "mensal",
@@ -87,9 +90,9 @@ export default function TuitionCalculator() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Calculadora de Mensalidades</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">{t('tuition.title')}</h2>
           <p className="text-xl text-gray-600">
-            Calcule o valor das mensalidades de acordo com o nível de ensino e modalidade de pagamento.
+            {t('tuition.subtitle')}
           </p>
         </motion.div>
         

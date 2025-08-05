@@ -37,6 +37,10 @@ const translations = {
     'about.missao_desc': 'Formar cidadãos globais preparados para os desafios do século XXI através de uma educação bilíngue e multicultural.',
     'about.intercambio': 'Intercâmbio Cultural',
     'about.intercambio_desc': 'Programa único de intercâmbio que conecta estudantes angolanos e chineses, promovendo compreensão cultural e colaboração internacional.',
+    'about.excelencia': 'Excelência Acadêmica',
+    'about.excelencia_desc': 'Currículo internacional reconhecido, preparando estudantes para universidades de prestígio em Angola, China e no mundo.',
+    'about.comunidade': 'Comunidade Diversa',
+    'about.comunidade_desc': 'Ambiente inclusivo que celebra a diversidade cultural e promove o desenvolvimento integral dos nossos estudantes.',
     
     // Programs Section
     'programs.title': 'Nossos Programas',
@@ -63,6 +67,54 @@ const translations = {
     'footer.contato': 'Contato',
     'footer.seguir': 'Siga-nos',
     'footer.direitos': 'Todos os direitos reservados.',
+    
+    // Stats
+    'stats.estudantes': 'Estudantes',
+    'stats.professores': 'Professores',
+    'stats.programas': 'Programas',
+    'stats.parceiros': 'Parceiros',
+    
+    // Virtual Tour
+    'tour.title': 'Tour Virtual',
+    'tour.subtitle': 'Explore nossas instalações modernas',
+    'tour.classroom': 'Sala de Aula Principal',
+    'tour.laboratory': 'Laboratório de Ciências',
+    'tour.library': 'Biblioteca Central',
+    'tour.sports': 'Centro Desportivo',
+    'tour.visit': 'Começar Tour',
+    
+    // Gallery
+    'gallery.title': 'Galeria',
+    'gallery.subtitle': 'Momentos especiais da nossa comunidade escolar',
+    'gallery.ver_mais': 'Ver Mais',
+    
+    // News
+    'news.title': 'Notícias',
+    'news.subtitle': 'Fique por dentro das novidades da escola',
+    'news.ler_mais': 'Ler Mais',
+    'news.intercambio': 'Intercâmbio',
+    'news.educacao': 'Educação',
+    'news.eventos': 'Eventos',
+    
+    // Tuition Calculator
+    'tuition.title': 'Calculadora de Mensalidades',
+    'tuition.subtitle': 'Calcule o valor das mensalidades para seu plano educacional',
+    'tuition.nivel': 'Nível de Ensino',
+    'tuition.primario': 'Ensino Primário',
+    'tuition.secundario': 'Ensino Secundário',
+    'tuition.intercambio': 'Programa de Intercâmbio',
+    'tuition.estudantes': 'Número de Estudantes',
+    'tuition.pagamento': 'Modalidade de Pagamento',
+    'tuition.mensal': 'Mensal',
+    'tuition.trimestral': 'Trimestral',
+    'tuition.semestral': 'Semestral',
+    'tuition.anual': 'Anual',
+    'tuition.desconto': 'Desconto por Pagamento Antecipado',
+    'tuition.calcular': 'Calcular',
+    'tuition.resultado': 'Resultado do Cálculo',
+    'tuition.valor_base': 'Valor Base',
+    'tuition.desconto_total': 'Desconto Total',
+    'tuition.valor_final': 'Valor Final',
   },
   zh: {
     // Navigation
@@ -92,6 +144,10 @@ const translations = {
     'about.missao_desc': '通过双语和多元文化教育，培养准备好应对21世纪挑战的全球公民。',
     'about.intercambio': '文化交流',
     'about.intercambio_desc': '独特的交流项目连接安哥拉和中国学生，促进文化理解和国际合作。',
+    'about.excelencia': '学术卓越',
+    'about.excelencia_desc': '国际认可的课程，为学生进入安哥拉、中国和世界各地的知名大学做准备。',
+    'about.comunidade': '多元社区',
+    'about.comunidade_desc': '包容的环境，庆祝文化多样性，促进学生的全面发展。',
     
     // Programs Section
     'programs.title': '我们的课程',
@@ -118,6 +174,54 @@ const translations = {
     'footer.contato': '联系方式',
     'footer.seguir': '关注我们',
     'footer.direitos': '版权所有。',
+    
+    // Stats
+    'stats.estudantes': '学生',
+    'stats.professores': '教师',
+    'stats.programas': '项目',
+    'stats.parceiros': '合作伙伴',
+    
+    // Virtual Tour
+    'tour.title': '虚拟参观',
+    'tour.subtitle': '探索我们的现代化设施',
+    'tour.classroom': '主教室',
+    'tour.laboratory': '科学实验室',
+    'tour.library': '中央图书馆',
+    'tour.sports': '体育中心',
+    'tour.visit': '开始参观',
+    
+    // Gallery
+    'gallery.title': '图片库',
+    'gallery.subtitle': '我们学校社区的特殊时刻',
+    'gallery.ver_mais': '查看更多',
+    
+    // News
+    'news.title': '新闻',
+    'news.subtitle': '了解学校最新动态',
+    'news.ler_mais': '阅读更多',
+    'news.intercambio': '交流项目',
+    'news.educacao': '教育',
+    'news.eventos': '活动',
+    
+    // Tuition Calculator
+    'tuition.title': '学费计算器',
+    'tuition.subtitle': '计算您教育计划的学费金额',
+    'tuition.nivel': '教育级别',
+    'tuition.primario': '小学教育',
+    'tuition.secundario': '中学教育',
+    'tuition.intercambio': '交流项目',
+    'tuition.estudantes': '学生人数',
+    'tuition.pagamento': '付款方式',
+    'tuition.mensal': '月付',
+    'tuition.trimestral': '季付',
+    'tuition.semestral': '半年付',
+    'tuition.anual': '年付',
+    'tuition.desconto': '提前付款折扣',
+    'tuition.calcular': '计算',
+    'tuition.resultado': '计算结果',
+    'tuition.valor_base': '基础价值',
+    'tuition.desconto_total': '总折扣',
+    'tuition.valor_final': '最终价值',
   }
 };
 

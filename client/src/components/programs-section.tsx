@@ -1,26 +1,29 @@
 import { motion } from "framer-motion";
 import { Baby, GraduationCap, ArrowRightLeft, Check } from "lucide-react";
+import { useLanguage } from "@/contexts/language-context";
 
 export default function ProgramsSection() {
+  const { t } = useLanguage();
+  
   const programs = [
     {
       icon: Baby,
-      title: "Ensino Primário",
-      description: "Base sólida em matemática, ciências, línguas e artes, com metodologia bilíngue português-chinês.",
+      title: t('programs.primario'),
+      description: t('programs.primario_desc'),
       features: ["Currículo Internacional", "Educação Bilíngue", "Atividades Extracurriculares"],
       color: "bg-angola-blue"
     },
     {
       icon: GraduationCap,
-      title: "Ensino Secundário",
-      description: "Preparação para o ensino superior com foco em ciências, tecnologia e humanidades.",
+      title: t('programs.secundario'),
+      description: t('programs.secundario_desc'),
       features: ["Preparação Universitária", "Laboratórios Modernos", "Orientação Vocacional"],
       color: "bg-china-yellow"
     },
     {
       icon: ArrowRightLeft,
-      title: "Programa de Intercâmbio",
-      description: "Oportunidades exclusivas de estudo na China e intercâmbio cultural.",
+      title: t('programs.intercambio'),
+      description: t('programs.intercambio_desc'),
       features: ["Imersão Cultural", "Universidades Parceiras", "Certificação Internacional"],
       color: "bg-red-500"
     }
@@ -35,9 +38,9 @@ export default function ProgramsSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Nossos Programas</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">{t('programs.title')}</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Oferecemos uma ampla gama de programas educacionais adaptados às necessidades dos nossos estudantes.
+            {t('programs.subtitle')}
           </p>
         </motion.div>
         
