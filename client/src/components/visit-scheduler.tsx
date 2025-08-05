@@ -55,7 +55,7 @@ export default function VisitScheduler() {
       
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.error || "Erro ao agendar visita");
+        throw new Error(error.error || t('visit.erro_agendar_visita'));
       }
       
       return response.json();
@@ -64,14 +64,14 @@ export default function VisitScheduler() {
       queryClient.invalidateQueries({ queryKey: ["/api/visit-appointments"] });
       setIsSubmitted(true);
       toast({
-        title: "Visita Agendada!",
-        description: "Sua solicitação foi recebida. Entraremos em contato em breve para confirmar.",
+        title: t('visit.visita_agendada'),
+        description: t('visit.solicitacao_recebida'),
       });
       form.reset();
     },
     onError: (error: Error) => {
       toast({
-        title: "Erro ao Agendar",
+        title: t('visit.erro_ao_agendar'),
         description: error.message,
         variant: "destructive",
       });
@@ -111,11 +111,11 @@ export default function VisitScheduler() {
               transition={{ delay: 0.3 }}
             >
               <CardTitle className="text-3xl font-bold text-green-700 dark:text-green-400 mb-2">
-                Agendamento Confirmado!
+                {t('visit.agendamento_confirmado')}
               </CardTitle>
               <div className="flex items-center justify-center gap-2 mb-4">
                 <Sparkles className="h-5 w-5 text-china-yellow" />
-                <span className="text-china-yellow font-semibold">Sucesso</span>
+                <span className="text-china-yellow font-semibold">{t('visit.sucesso_titulo')}</span>
                 <Sparkles className="h-5 w-5 text-china-yellow" />
               </div>
             </motion.div>
@@ -125,7 +125,7 @@ export default function VisitScheduler() {
               transition={{ delay: 0.4 }}
             >
               <CardDescription className="text-lg text-green-600 dark:text-green-300">
-                Recebemos sua solicitação de visita. Nossa equipe entrará em contato em até 24 horas para confirmar os detalhes.
+                {t('visit.descricao_sucesso')}
               </CardDescription>
             </motion.div>
           </CardHeader>
@@ -137,19 +137,19 @@ export default function VisitScheduler() {
               className="space-y-4"
             >
               <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border shadow-sm">
-                <p className="text-sm text-muted-foreground mb-2">Próximos passos:</p>
+                <p className="text-sm text-muted-foreground mb-2">{t('visit.proximos_passos')}</p>
                 <ul className="text-sm space-y-1 text-left">
                   <li className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-angola-blue rounded-full"></div>
-                    Confirmação por email ou telefone
+                    {t('visit.confirmacao_email')}
                   </li>
                   <li className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-angola-blue rounded-full"></div>
-                    Preparação dos materiais informativos
+                    {t('visit.preparacao_materiais')}
                   </li>
                   <li className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-angola-blue rounded-full"></div>
-                    Agendamento definitivo da visita
+                    {t('visit.agendamento_definitivo')}
                   </li>
                 </ul>
               </div>
@@ -158,7 +158,7 @@ export default function VisitScheduler() {
                 variant="outline"
                 className="border-green-500 text-green-600 hover:bg-green-50 dark:hover:bg-green-950"
               >
-                Agendar Nova Visita
+                {t('visit.agendar_nova')}
               </Button>
             </motion.div>
           </CardContent>
@@ -187,12 +187,12 @@ export default function VisitScheduler() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
               <div className="flex items-center gap-3">
                 <Calendar className="h-6 sm:h-8 w-6 sm:w-8" />
-                <h2 className="text-2xl sm:text-4xl font-bold">Agende sua Visita</h2>
+                <h2 className="text-2xl sm:text-4xl font-bold">{t('visit.agende_sua_visita')}</h2>
                 <Building className="h-6 sm:h-8 w-6 sm:w-8" />
               </div>
             </div>
             <p className="text-blue-100 text-xl max-w-3xl mx-auto leading-relaxed">
-              Conheça nossa escola pessoalmente e descubra como conectamos Angola e China através da educação de excelência
+              {t('visit.conheca_escola')}
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 mt-6">
               <div className="flex items-center gap-2 text-china-yellow">

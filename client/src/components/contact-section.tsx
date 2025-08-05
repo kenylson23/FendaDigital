@@ -189,7 +189,7 @@ export default function ContactSection() {
                   <Label className="text-sm font-medium text-gray-700">{t('contact.assunto')} *</Label>
                   <Select value={formData.subject} onValueChange={(value) => setFormData(prev => ({ ...prev, subject: value }))}>
                     <SelectTrigger className="mt-1">
-                      <SelectValue placeholder="Selecione um assunto" />
+                      <SelectValue placeholder={t('placeholder.selecione_assunto')} />
                     </SelectTrigger>
                     <SelectContent>
                       {subjectOptions.map((option) => (
@@ -219,7 +219,7 @@ export default function ContactSection() {
                 className="w-full bg-angola-blue hover:bg-blue-700"
                 size="lg"
               >
-                {contactMutation.isPending ? "Enviando..." : t('contact.enviar')}
+                {contactMutation.isPending ? t('loading.enviando') : t('contact.enviar')}
               </Button>
             </form>
           </motion.div>

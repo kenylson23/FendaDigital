@@ -105,13 +105,13 @@ export default function TuitionCalculator() {
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-6">
               <div>
-                <Label className="text-sm font-medium text-gray-700 mb-2">Nível de Ensino</Label>
+                <Label className="text-sm font-medium text-gray-700 mb-2">{t('tuition.nivel_ensino')}</Label>
                 <Select 
                   value={formData.educationLevel} 
                   onValueChange={(value) => setFormData(prev => ({ ...prev, educationLevel: value }))}
                 >
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Selecione o nível" />
+                    <SelectValue placeholder={t('placeholder.selecione_nivel')} />
                   </SelectTrigger>
                   <SelectContent>
                     {levelOptions.map((option) => (
@@ -124,7 +124,7 @@ export default function TuitionCalculator() {
               </div>
               
               <div>
-                <Label className="text-sm font-medium text-gray-700 mb-2">Modalidade de Pagamento</Label>
+                <Label className="text-sm font-medium text-gray-700 mb-2">{t('tuition.modalidade_pagamento')}</Label>
                 <Select 
                   value={formData.paymentMode} 
                   onValueChange={(value) => setFormData(prev => ({ ...prev, paymentMode: value }))}
@@ -143,7 +143,7 @@ export default function TuitionCalculator() {
               </div>
               
               <div>
-                <Label className="text-sm font-medium text-gray-700 mb-2">Número de Estudantes</Label>
+                <Label className="text-sm font-medium text-gray-700 mb-2">{t('tuition.numero_estudantes')}</Label>
                 <Input
                   type="number"
                   min="1"
@@ -161,7 +161,7 @@ export default function TuitionCalculator() {
                   onCheckedChange={(checked) => setFormData(prev => ({ ...prev, earlyPayment: !!checked }))}
                 />
                 <Label htmlFor="early-payment" className="text-sm text-gray-700">
-                  Pagamento antecipado (desconto adicional de 5%)
+                  {t('tuition.pagamento_antecipado')}
                 </Label>
               </div>
               
@@ -172,7 +172,7 @@ export default function TuitionCalculator() {
                 size="lg"
               >
                 <Calculator className="mr-2" size={20} />
-                {calculateMutation.isPending ? "Calculando..." : "Calcular Mensalidade"}
+                {calculateMutation.isPending ? t('loading.calculando') : t('tuition.calcular_mensalidade')}
               </Button>
             </div>
             

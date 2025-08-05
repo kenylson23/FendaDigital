@@ -153,6 +153,48 @@ const translations = {
     
     // News Articles
     'news.btn_ler_mais': 'Ler mais',
+    
+    // Form Placeholders
+    'placeholder.selecione_assunto': 'Selecione um assunto',
+    'placeholder.selecione_nivel': 'Selecione o nível',
+    
+    // Loading States
+    'loading.enviando': 'Enviando...',
+    'loading.calculando': 'Calculando...',
+    
+    // Tuition Calculator Labels
+    'tuition.nivel_ensino': 'Nível de Ensino',
+    'tuition.modalidade_pagamento': 'Modalidade de Pagamento',
+    'tuition.numero_estudantes': 'Número de Estudantes',
+    'tuition.pagamento_antecipado': 'Pagamento antecipado (desconto adicional de 5%)',
+    'tuition.calcular_mensalidade': 'Calcular Mensalidade',
+    
+    // Footer Sections
+    'footer.programas': 'Programas',
+    'footer.contato': 'Contato',
+    'footer.ensino_primario': 'Ensino Primário',
+    'footer.ensino_secundario': 'Ensino Secundário',
+    'footer.intercambio_angola_china': 'Intercâmbio Angola-China',
+    'footer.atividades_extracurriculares': 'Atividades Extracurriculares',
+    'footer.todos_direitos': '© 2024 Escola Fenda da Tundavala. Todos os direitos reservados.',
+    
+    // Visit Scheduler Messages
+    'visit.agendamento_confirmado': 'Agendamento Confirmado!',
+    'visit.sucesso_titulo': 'Sucesso',
+    'visit.descricao_sucesso': 'Recebemos sua solicitação de visita. Nossa equipe entrará em contato em até 24 horas para confirmar os detalhes.',
+    'visit.proximos_passos': 'Próximos passos:',
+    'visit.confirmacao_email': 'Confirmação por email ou telefone',
+    'visit.erro_agendar_visita': 'Erro ao agendar visita',
+    'visit.solicitar_reagendar': 'Solicitar reagendamento se necessário',
+    'visit.receber_informacoes': 'Receber informações sobre preparação',
+    'visit.preparacao_materiais': 'Preparação dos materiais informativos',
+    'visit.agendamento_definitivo': 'Agendamento definitivo da visita',
+    'visit.agendar_nova': 'Agendar Nova Visita',
+    'visit.agende_sua_visita': 'Agende sua Visita',
+    'visit.conheca_escola': 'Conheça nossa escola pessoalmente e descubra como conectamos Angola e China através da educação de excelência',
+    'visit.visita_agendada': 'Visita Agendada!',
+    'visit.solicitacao_recebida': 'Sua solicitação foi recebida. Entraremos em contato em breve para confirmar.',
+    'visit.erro_ao_agendar': 'Erro ao Agendar',
   },
   zh: {
     // Navigation
@@ -298,6 +340,48 @@ const translations = {
     
     // News Articles
     'news.btn_ler_mais': '阅读更多',
+    
+    // Form Placeholders
+    'placeholder.selecione_assunto': '选择主题',
+    'placeholder.selecione_nivel': '选择级别',
+    
+    // Loading States
+    'loading.enviando': '发送中...',
+    'loading.calculando': '计算中...',
+    
+    // Tuition Calculator Labels
+    'tuition.nivel_ensino': '教育级别',
+    'tuition.modalidade_pagamento': '付款方式',
+    'tuition.numero_estudantes': '学生人数',
+    'tuition.pagamento_antecipado': '提前付款（额外5%折扣）',
+    'tuition.calcular_mensalidade': '计算学费',
+    
+    // Footer Sections
+    'footer.programas': '项目',
+    'footer.contato': '联系',
+    'footer.ensino_primario': '小学教育',
+    'footer.ensino_secundario': '中学教育',
+    'footer.intercambio_angola_china': '安哥拉-中国交流',
+    'footer.atividades_extracurriculares': '课外活动',
+    'footer.todos_direitos': '© 2024 东达拉裂缝学校。版权所有。',
+    
+    // Visit Scheduler Messages
+    'visit.agendamento_confirmado': '预约确认！',
+    'visit.sucesso_titulo': '成功',
+    'visit.descricao_sucesso': '我们已收到您的参观请求。我们的团队将在24小时内联系您确认详情。',
+    'visit.proximos_passos': '下一步：',
+    'visit.confirmacao_email': '通过电子邮件或电话确认',
+    'visit.erro_agendar_visita': '预约参观错误',
+    'visit.solicitar_reagendar': '如需要可请求重新安排',
+    'visit.receber_informacoes': '接收准备信息',
+    'visit.preparacao_materiais': '准备信息材料',
+    'visit.agendamento_definitivo': '最终确定参观安排',
+    'visit.agendar_nova': '预约新访问',
+    'visit.agende_sua_visita': '预约您的参观',
+    'visit.conheca_escola': '亲自了解我们的学校，发现我们如何通过优质教育连接安哥拉和中国',
+    'visit.visita_agendada': '参观已预约！',
+    'visit.solicitacao_recebida': '您的请求已收到。我们将很快联系您确认。',
+    'visit.erro_ao_agendar': '预约错误',
   }
 };
 

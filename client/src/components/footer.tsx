@@ -78,17 +78,17 @@ export default function Footer() {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Programas</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('footer.programas')}</h3>
             <ul className="space-y-2">
-              <li><span className="text-gray-400">Ensino Primário</span></li>
-              <li><span className="text-gray-400">Ensino Secundário</span></li>
-              <li><span className="text-gray-400">Intercâmbio Angola-China</span></li>
-              <li><span className="text-gray-400">Atividades Extracurriculares</span></li>
+              <li><span className="text-gray-400">{t('footer.ensino_primario')}</span></li>
+              <li><span className="text-gray-400">{t('footer.ensino_secundario')}</span></li>
+              <li><span className="text-gray-400">{t('footer.intercambio_angola_china')}</span></li>
+              <li><span className="text-gray-400">{t('footer.atividades_extracurriculares')}</span></li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contato</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('footer.contato')}</h3>
             <div className="space-y-2 text-gray-400">
               <p><MapPin className="inline mr-2" size={16} />Fenda da Tundavala, Huíla</p>
               <p><Phone className="inline mr-2" size={16} />+244 123 456 789</p>
@@ -98,7 +98,7 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 Escola Fenda da Tundavala. Todos os direitos reservados.</p>
+          <p>{t('footer.todos_direitos')}</p>
         </div>
       </div>
     </footer>
