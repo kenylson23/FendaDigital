@@ -41,28 +41,33 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 0.6 }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <Button 
-            onClick={() => scrollToSection("calculator")}
-            className="bg-china-yellow/90 backdrop-blur-sm text-gray-900 hover:bg-china-yellow px-8 py-4 text-lg font-semibold transform hover:scale-105 transition-all shadow-xl border border-yellow-400/20"
-            size="lg"
-          >
-            Calculadora de Mensalidades
-          </Button>
+          {/* Botão Principal - Agendar Visita */}
           <Link href="/agendar-visita">
             <Button 
-              className="bg-white/10 backdrop-blur-sm border-2 border-china-yellow/80 text-china-yellow hover:bg-china-yellow hover:text-gray-900 px-8 py-4 text-lg font-semibold transition-all flex items-center gap-2 shadow-xl"
+              className="bg-gradient-to-r from-angola-blue to-china-yellow text-white hover:from-blue-700 hover:to-yellow-600 px-10 py-4 text-lg font-bold transform hover:scale-105 transition-all shadow-2xl border-2 border-white/20 backdrop-blur-sm flex items-center gap-3"
               size="lg"
             >
               <Calendar className="h-5 w-5" />
               Agendar Visita
             </Button>
           </Link>
+          
+          {/* Botões Secundários */}
           <Button 
-            onClick={() => scrollToSection("tour")}
-            className="bg-white/10 backdrop-blur-sm border-2 border-white/80 text-white hover:bg-white hover:text-angola-blue px-8 py-4 text-lg font-semibold transition-all shadow-xl"
+            onClick={() => scrollToSection("calculator")}
+            variant="outline"
+            className="bg-white/10 backdrop-blur-sm border-2 border-white/60 text-white hover:bg-white/20 hover:border-white px-8 py-4 text-lg font-medium transition-all shadow-lg"
             size="lg"
           >
-            Tour Virtual 360°
+            Calculadora
+          </Button>
+          <Button 
+            onClick={() => scrollToSection("tour")}
+            variant="outline"
+            className="bg-white/10 backdrop-blur-sm border-2 border-white/60 text-white hover:bg-white/20 hover:border-white px-8 py-4 text-lg font-medium transition-all shadow-lg"
+            size="lg"
+          >
+            Tour Virtual
           </Button>
         </motion.div>
       </div>
