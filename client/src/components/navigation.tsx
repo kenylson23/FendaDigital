@@ -61,6 +61,15 @@ export default function Navigation() {
             >
               Contato
             </Button>
+            <Button 
+              onClick={() => {
+                alert("Portal do Aluno está sendo desenvolvido e brevemente estará disponível!");
+              }}
+              variant="outline"
+              className="border-angola-blue text-angola-blue hover:bg-angola-blue hover:text-white"
+            >
+              Portal do Aluno
+            </Button>
           </div>
           
           <div className="md:hidden flex items-center">
@@ -114,6 +123,15 @@ export default function Navigation() {
               className="block px-3 py-2 text-gray-700 w-full text-left"
             >
               Contato
+            </button>
+            <button 
+              onClick={() => {
+                alert("Portal do Aluno está sendo desenvolvido e brevemente estará disponível!");
+                setIsMobileMenuOpen(false);
+              }}
+              className="block px-3 py-2 text-angola-blue font-semibold w-full text-left"
+            >
+              Portal do Aluno
             </button>
           </div>
         </div>
