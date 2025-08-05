@@ -69,20 +69,33 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-20">
           <motion.div 
             className="flex items-center"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            whileHover={{ scale: 1.01 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
             <Link href="/" className="flex items-center group">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-angola-blue to-china-yellow rounded-full blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
-                <GraduationCap className="relative text-angola-blue group-hover:text-china-yellow transition-colors duration-300" size={40} />
+              <div className="relative mr-3 sm:mr-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-angola-blue via-blue-600 to-china-yellow rounded-xl shadow-lg group-hover:shadow-xl transition-all duration-300 flex items-center justify-center">
+                  <GraduationCap className="text-white" size={20} />
+                </div>
+                <div className="absolute -top-0.5 -right-0.5 w-3 h-3 sm:w-4 sm:h-4 bg-china-yellow rounded-full border-2 border-white shadow-sm"></div>
               </div>
-              <div className="ml-3">
-                <span className="text-xl font-bold bg-gradient-to-r from-angola-blue to-china-yellow bg-clip-text text-transparent">
-                  Fenda da Tundavala
-                </span>
-                <div className="text-xs text-gray-500 dark:text-gray-400 -mt-1">
-                  Escola Angola-China
+              <div className="flex flex-col min-w-0">
+                <div className="text-base sm:text-lg font-bold text-gray-900 dark:text-white leading-tight truncate">
+                  Escola Fenda da Tundavala
+                </div>
+                <div className="hidden sm:flex items-center gap-2 text-xs text-gray-600 dark:text-gray-400 font-medium">
+                  <span className="flex items-center gap-1">
+                    <div className="w-2 h-2 rounded-full bg-red-600"></div>
+                    Angola
+                  </span>
+                  <span className="text-gray-400">•</span>
+                  <span className="flex items-center gap-1">
+                    <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
+                    China
+                  </span>
+                </div>
+                <div className="sm:hidden text-xs text-gray-600 dark:text-gray-400 font-medium">
+                  Angola • China
                 </div>
               </div>
             </Link>
