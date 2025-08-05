@@ -30,6 +30,20 @@ export const tuitionCalculations = pgTable("tuition_calculations", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+export const visitAppointments = pgTable("visit_appointments", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone"),
+  visitDate: timestamp("visit_date").notNull(),
+  visitTime: text("visit_time").notNull(),
+  visitType: text("visit_type").notNull(), // "facilities", "meeting", "enrollment"
+  groupSize: integer("group_size").notNull().default(1),
+  specialRequests: text("special_requests"),
+  status: text("status").notNull().default("pending"), // "pending", "confirmed", "cancelled"
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
@@ -59,6 +73,30 @@ export const tuitionRequestSchema = z.object({
   earlyPayment: z.boolean(),
 });
 
+export const insertVisitAppointmentSchema = createInsertSchema(visitAppointments).pick({
+  name: true,
+  email: true,
+  phone: true,
+  visitDate: true,
+  visitTime: true,
+  visitType: true,
+  groupSize: true,
+  specialRequests: true,
+});
+
+export const visitAppointmentRequestSchema = z.object({
+  name: z.string().min(1, "Nome é obrigatório"),
+  email: z.string().email("Email inválido"),
+  phone: z.string().optional(),
+  visitDate: z.string().min(1, "Data da visita é obrigatória"),
+  visitTime: z.string().min(1, "Horário da visita é obrigatório"),
+  visitType: z.enum(["facilities", "meeting", "enrollment"], {
+    errorMap: () => ({ message: "Tipo de visita inválido" })
+  }),
+  groupSize: z.number().min(1, "Tamanho do grupo deve ser pelo menos 1").max(20, "Máximo 20 pessoas"),
+  specialRequests: z.string().optional(),
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 
@@ -69,6 +107,10 @@ export type InsertTuitionCalculation = z.infer<typeof insertTuitionCalculationSc
 export type TuitionCalculation = typeof tuitionCalculations.$inferSelect;
 
 export type TuitionRequest = z.infer<typeof tuitionRequestSchema>;
+
+export type InsertVisitAppointment = z.infer<typeof insertVisitAppointmentSchema>;
+export type VisitAppointment = typeof visitAppointments.$inferSelect;
+export type VisitAppointmentRequest = z.infer<typeof visitAppointmentRequestSchema>;
 
 export interface TuitionResult {
   educationLevel: string;

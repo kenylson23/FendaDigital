@@ -1,4 +1,4 @@
-import { type User, type InsertUser, type Contact, type InsertContact, type TuitionCalculation, type InsertTuitionCalculation } from "@shared/schema";
+import { type User, type InsertUser, type Contact, type InsertContact, type TuitionCalculation, type InsertTuitionCalculation, type VisitAppointment, type InsertVisitAppointment } from "@shared/schema";
 import { randomUUID } from "crypto";
 
 export interface IStorage {
@@ -11,17 +11,24 @@ export interface IStorage {
   
   createTuitionCalculation(calculation: InsertTuitionCalculation): Promise<TuitionCalculation>;
   getTuitionCalculations(): Promise<TuitionCalculation[]>;
+  
+  createVisitAppointment(appointment: InsertVisitAppointment): Promise<VisitAppointment>;
+  getVisitAppointments(): Promise<VisitAppointment[]>;
+  getVisitAppointment(id: string): Promise<VisitAppointment | undefined>;
+  updateVisitAppointmentStatus(id: string, status: string): Promise<VisitAppointment | undefined>;
 }
 
 export class MemStorage implements IStorage {
   private users: Map<string, User>;
   private contacts: Map<string, Contact>;
   private tuitionCalculations: Map<string, TuitionCalculation>;
+  private visitAppointments: Map<string, VisitAppointment>;
 
   constructor() {
     this.users = new Map();
     this.contacts = new Map();
     this.tuitionCalculations = new Map();
+    this.visitAppointments = new Map();
   }
 
   async getUser(id: string): Promise<User | undefined> {
@@ -46,6 +53,7 @@ export class MemStorage implements IStorage {
     const contact: Contact = { 
       ...insertContact, 
       id, 
+      phone: insertContact.phone || null,
       createdAt: new Date() 
     };
     this.contacts.set(id, contact);
@@ -63,6 +71,7 @@ export class MemStorage implements IStorage {
     const calculation: TuitionCalculation = { 
       ...insertCalculation, 
       id,
+      earlyPayment: insertCalculation.earlyPayment || 0,
       createdAt: new Date()
     };
     this.tuitionCalculations.set(id, calculation);
@@ -73,6 +82,41 @@ export class MemStorage implements IStorage {
     return Array.from(this.tuitionCalculations.values()).sort(
       (a, b) => (b.createdAt?.getTime() || 0) - (a.createdAt?.getTime() || 0)
     );
+  }
+
+  async createVisitAppointment(insertAppointment: InsertVisitAppointment): Promise<VisitAppointment> {
+    const id = randomUUID();
+    const appointment: VisitAppointment = { 
+      ...insertAppointment, 
+      id,
+      phone: insertAppointment.phone || null,
+      specialRequests: insertAppointment.specialRequests || null,
+      groupSize: insertAppointment.groupSize || 1,
+      status: "pending",
+      createdAt: new Date()
+    };
+    this.visitAppointments.set(id, appointment);
+    return appointment;
+  }
+
+  async getVisitAppointments(): Promise<VisitAppointment[]> {
+    return Array.from(this.visitAppointments.values()).sort(
+      (a, b) => (b.createdAt?.getTime() || 0) - (a.createdAt?.getTime() || 0)
+    );
+  }
+
+  async getVisitAppointment(id: string): Promise<VisitAppointment | undefined> {
+    return this.visitAppointments.get(id);
+  }
+
+  async updateVisitAppointmentStatus(id: string, status: string): Promise<VisitAppointment | undefined> {
+    const appointment = this.visitAppointments.get(id);
+    if (appointment) {
+      const updatedAppointment = { ...appointment, status };
+      this.visitAppointments.set(id, updatedAppointment);
+      return updatedAppointment;
+    }
+    return undefined;
   }
 }
 

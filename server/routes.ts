@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertContactSchema, tuitionRequestSchema, type TuitionResult } from "@shared/schema";
+import { insertContactSchema, tuitionRequestSchema, visitAppointmentRequestSchema, type TuitionResult } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -108,6 +108,94 @@ export async function registerRoutes(app: Express): Promise<Server> {
       } else {
         res.status(500).json({ error: "Erro interno do servidor" });
       }
+    }
+  });
+
+  // Visit appointment booking
+  app.post("/api/visit-appointments", async (req, res) => {
+    try {
+      const validatedData = visitAppointmentRequestSchema.parse(req.body);
+      
+      // Convert date string to timestamp
+      const visitDateTime = new Date(`${validatedData.visitDate} ${validatedData.visitTime}`);
+      
+      // Check if the appointment is in the future
+      if (visitDateTime <= new Date()) {
+        return res.status(400).json({ error: "A data da visita deve ser no futuro" });
+      }
+
+      // Check if it's during business hours (8:00-17:00, Monday-Friday)
+      const dayOfWeek = visitDateTime.getDay();
+      const hour = visitDateTime.getHours();
+      
+      if (dayOfWeek === 0 || dayOfWeek === 6) {
+        return res.status(400).json({ error: "Visitas disponíveis apenas de segunda a sexta-feira" });
+      }
+      
+      if (hour < 8 || hour >= 17) {
+        return res.status(400).json({ error: "Horário de visitas: 08:00 às 17:00" });
+      }
+
+      const appointment = await storage.createVisitAppointment({
+        name: validatedData.name,
+        email: validatedData.email,
+        phone: validatedData.phone,
+        visitDate: visitDateTime,
+        visitTime: validatedData.visitTime,
+        visitType: validatedData.visitType,
+        groupSize: validatedData.groupSize,
+        specialRequests: validatedData.specialRequests,
+      });
+
+      res.json({ success: true, appointment });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ error: "Dados inválidos", details: error.errors });
+      } else {
+        res.status(500).json({ error: "Erro interno do servidor" });
+      }
+    }
+  });
+
+  // Get all visit appointments
+  app.get("/api/visit-appointments", async (req, res) => {
+    try {
+      const appointments = await storage.getVisitAppointments();
+      res.json(appointments);
+    } catch (error) {
+      res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  });
+
+  // Get single visit appointment
+  app.get("/api/visit-appointments/:id", async (req, res) => {
+    try {
+      const appointment = await storage.getVisitAppointment(req.params.id);
+      if (!appointment) {
+        return res.status(404).json({ error: "Agendamento não encontrado" });
+      }
+      res.json(appointment);
+    } catch (error) {
+      res.status(500).json({ error: "Erro interno do servidor" });
+    }
+  });
+
+  // Update visit appointment status
+  app.patch("/api/visit-appointments/:id/status", async (req, res) => {
+    try {
+      const { status } = req.body;
+      if (!["pending", "confirmed", "cancelled"].includes(status)) {
+        return res.status(400).json({ error: "Status inválido" });
+      }
+
+      const appointment = await storage.updateVisitAppointmentStatus(req.params.id, status);
+      if (!appointment) {
+        return res.status(404).json({ error: "Agendamento não encontrado" });
+      }
+
+      res.json({ success: true, appointment });
+    } catch (error) {
+      res.status(500).json({ error: "Erro interno do servidor" });
     }
   });
 

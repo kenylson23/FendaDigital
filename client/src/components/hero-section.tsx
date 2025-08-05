@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 
 export default function HeroSection() {
   const scrollToSection = (sectionId: string) => {
@@ -50,6 +51,15 @@ export default function HeroSection() {
           >
             Calculadora de Mensalidades
           </Button>
+          <Link href="/agendar-visita">
+            <Button 
+              className="bg-transparent border-2 border-china-yellow text-china-yellow hover:bg-china-yellow hover:text-gray-900 px-8 py-4 text-lg font-semibold transition-all flex items-center gap-2"
+              size="lg"
+            >
+              <Calendar className="h-5 w-5" />
+              Agendar Visita
+            </Button>
+          </Link>
           <Button 
             onClick={() => scrollToSection("tour")}
             className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-angola-blue px-8 py-4 text-lg font-semibold transition-all"
