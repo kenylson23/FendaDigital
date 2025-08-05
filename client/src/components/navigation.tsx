@@ -3,6 +3,7 @@ import { GraduationCap, Menu, X, Calendar, Home, Info, BookOpen, Calculator, Cam
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/contexts/language-context";
 import StudentPortalModal from "@/components/student-portal-modal";
 
 // Navigation Button Component
@@ -39,6 +40,7 @@ export default function Navigation() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isNavCollapsed, setIsNavCollapsed] = useState(false);
   const [location] = useLocation();
+  const { language, setLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -132,16 +134,16 @@ export default function Navigation() {
                 >
                   {location === "/" ? (
                     <>
-                      <NavButton icon={Home} label="Início" onClick={() => scrollToSection("home")} />
-                      <NavButton icon={Info} label="Sobre" onClick={() => scrollToSection("about")} />
-                      <NavButton icon={BookOpen} label="Programas" onClick={() => scrollToSection("programs")} />
-                      <NavButton icon={Calculator} label="Mensalidades" onClick={() => scrollToSection("calculator")} />
-                      <NavButton icon={Camera} label="Tour Virtual" onClick={() => scrollToSection("tour")} />
-                      <NavButton icon={Mail} label="Contato" onClick={() => scrollToSection("contact")} />
+                      <NavButton icon={Home} label={t('nav.inicio')} onClick={() => scrollToSection("home")} />
+                      <NavButton icon={Info} label={t('nav.sobre')} onClick={() => scrollToSection("about")} />
+                      <NavButton icon={BookOpen} label={t('nav.programas')} onClick={() => scrollToSection("programs")} />
+                      <NavButton icon={Calculator} label={t('nav.mensalidades')} onClick={() => scrollToSection("calculator")} />
+                      <NavButton icon={Camera} label={t('nav.tour')} onClick={() => scrollToSection("tour")} />
+                      <NavButton icon={Mail} label={t('nav.contato')} onClick={() => scrollToSection("contact")} />
                     </>
                   ) : (
                     <Link href="/">
-                      <NavButton icon={Home} label="← Início" />
+                      <NavButton icon={Home} label={`← ${t('nav.inicio')}`} />
                     </Link>
                   )}
                 </motion.div>
@@ -162,7 +164,7 @@ export default function Navigation() {
                       whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.9 }}
                       className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:text-angola-blue dark:hover:text-china-yellow hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
-                      title="Início"
+                      title={t('nav.inicio')}
                     >
                       <Home className="h-4 w-4" />
                     </motion.button>
@@ -171,7 +173,7 @@ export default function Navigation() {
                       whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.9 }}
                       className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:text-angola-blue dark:hover:text-china-yellow hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
-                      title="Sobre"
+                      title={t('nav.sobre')}
                     >
                       <Info className="h-4 w-4" />
                     </motion.button>
@@ -180,7 +182,7 @@ export default function Navigation() {
                       whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.9 }}
                       className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:text-angola-blue dark:hover:text-china-yellow hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
-                      title="Programas"
+                      title={t('nav.programas')}
                     >
                       <BookOpen className="h-4 w-4" />
                     </motion.button>
@@ -189,7 +191,7 @@ export default function Navigation() {
                       whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.9 }}
                       className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:text-angola-blue dark:hover:text-china-yellow hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
-                      title="Mensalidades"
+                      title={t('nav.mensalidades')}
                     >
                       <Calculator className="h-4 w-4" />
                     </motion.button>
@@ -198,7 +200,7 @@ export default function Navigation() {
                       whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.9 }}
                       className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:text-angola-blue dark:hover:text-china-yellow hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
-                      title="Tour Virtual"
+                      title={t('nav.tour')}
                     >
                       <Camera className="h-4 w-4" />
                     </motion.button>
@@ -207,7 +209,7 @@ export default function Navigation() {
                       whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.9 }}
                       className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:text-angola-blue dark:hover:text-china-yellow hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
-                      title="Contato"
+                      title={t('nav.contato')}
                     >
                       <Mail className="h-4 w-4" />
                     </motion.button>
@@ -218,7 +220,7 @@ export default function Navigation() {
                       whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.9 }}
                       className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:text-angola-blue dark:hover:text-china-yellow hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
-                      title="← Início"
+                      title={`← ${t('nav.inicio')}`}
                     >
                       <Home className="h-4 w-4" />
                     </motion.button>
@@ -234,7 +236,7 @@ export default function Navigation() {
               <Link href="/agendar-visita">
                 <Button className="bg-gradient-to-r from-angola-blue to-china-yellow text-white hover:from-blue-700 hover:to-yellow-600 transition-all duration-300 shadow-lg hover:shadow-xl rounded-full px-6 py-2.5 font-semibold">
                   <Calendar className="mr-2 h-4 w-4" />
-                  Agendar Visita
+                  {t('nav.agendar')}
                 </Button>
               </Link>
             </motion.div>
@@ -264,10 +266,14 @@ export default function Navigation() {
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                title="Idioma"
+                onClick={() => setLanguage(language === 'pt' ? 'zh' : 'pt')}
+                className="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors relative"
+                title={t('nav.idioma')}
               >
                 <Globe className="h-4 w-4 text-gray-600 dark:text-gray-300" />
+                <span className="absolute -top-1 -right-1 text-xs font-bold text-gray-700 dark:text-gray-300 bg-china-yellow rounded-full w-4 h-4 flex items-center justify-center">
+                  {language === 'pt' ? '中' : 'PT'}
+                </span>
               </motion.button>
 
               <motion.button
@@ -275,7 +281,7 @@ export default function Navigation() {
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setIsDarkMode(!isDarkMode)}
                 className="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                title="Alternar tema"
+                title={t('nav.tema')}
               >
                 {isDarkMode ? (
                   <Sun className="h-4 w-4 text-yellow-500" />
@@ -354,7 +360,7 @@ export default function Navigation() {
                   className="w-full flex items-center gap-3 px-4 py-3 mt-3 border-2 border-angola-blue text-angola-blue rounded-xl font-semibold hover:bg-angola-blue hover:text-white transition-colors"
                 >
                   <User className="h-5 w-5" />
-                  Portal do Aluno
+                  Portal
                 </motion.button>
               </div>
 
@@ -372,10 +378,14 @@ export default function Navigation() {
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                  title="Idioma"
+                  onClick={() => setLanguage(language === 'pt' ? 'zh' : 'pt')}
+                  className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors relative"
+                  title={t('nav.idioma')}
                 >
                   <Globe className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+                  <span className="absolute -top-1 -right-1 text-xs font-bold text-gray-700 dark:text-gray-300 bg-china-yellow rounded-full w-4 h-4 flex items-center justify-center">
+                    {language === 'pt' ? '中' : 'PT'}
+                  </span>
                 </motion.button>
 
                 <motion.button
@@ -383,7 +393,7 @@ export default function Navigation() {
                   whileTap={{ scale: 0.9 }}
                   onClick={() => setIsDarkMode(!isDarkMode)}
                   className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-                  title="Alternar tema"
+                  title={t('nav.tema')}
                 >
                   {isDarkMode ? (
                     <Sun className="h-5 w-5 text-yellow-500" />

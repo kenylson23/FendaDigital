@@ -2,8 +2,11 @@ import { motion } from "framer-motion";
 import { ChevronDown, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { useLanguage } from "@/contexts/language-context";
 
 export default function HeroSection() {
+  const { t } = useLanguage();
+  
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -27,11 +30,11 @@ export default function HeroSection() {
           className="bg-black/20 backdrop-blur-sm rounded-2xl p-8 mb-8 border border-white/10"
         >
           <h1 className="text-5xl md:text-7xl font-bold mb-6 drop-shadow-2xl">
-            Escola <span className="text-china-yellow drop-shadow-lg">Fenda da Tundavala</span>
+            <span className="text-china-yellow drop-shadow-lg">{t('hero.title')}</span>
           </h1>
           
           <p className="text-xl md:text-2xl opacity-95 drop-shadow-lg">
-            Conectando Angola e China através da educação de excelência
+            {t('hero.subtitle')}
           </p>
         </motion.div>
         
@@ -48,7 +51,7 @@ export default function HeroSection() {
               size="lg"
             >
               <Calendar className="h-5 w-5" />
-              Agendar Visita
+              {t('hero.agendar_visita')}
             </Button>
           </Link>
           
@@ -59,7 +62,7 @@ export default function HeroSection() {
             className="bg-white/10 backdrop-blur-sm border-2 border-white/60 text-white hover:bg-white/20 hover:border-white px-8 py-4 text-lg font-medium transition-all shadow-lg"
             size="lg"
           >
-            Calculadora
+            {t('hero.calculadora')}
           </Button>
           <Button 
             onClick={() => scrollToSection("tour")}
@@ -67,7 +70,7 @@ export default function HeroSection() {
             className="bg-white/10 backdrop-blur-sm border-2 border-white/60 text-white hover:bg-white/20 hover:border-white px-8 py-4 text-lg font-medium transition-all shadow-lg"
             size="lg"
           >
-            Tour Virtual
+            {t('hero.tour_virtual')}
           </Button>
         </motion.div>
       </div>
