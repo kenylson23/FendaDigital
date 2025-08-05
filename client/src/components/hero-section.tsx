@@ -52,8 +52,7 @@ export default function HeroSection() {
           </Button>
           <Button 
             onClick={() => scrollToSection("tour")}
-            variant="outline"
-            className="border-2 border-white text-white hover:bg-white hover:text-angola-blue px-8 py-4 text-lg font-semibold transition-all"
+            className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-angola-blue px-8 py-4 text-lg font-semibold transition-all"
             size="lg"
           >
             Tour Virtual 360°
