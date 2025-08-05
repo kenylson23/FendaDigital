@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { GraduationCap, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import StudentPortalModal from "@/components/student-portal-modal";
 
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isPortalModalOpen, setIsPortalModalOpen] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -62,9 +64,7 @@ export default function Navigation() {
               Contato
             </Button>
             <Button 
-              onClick={() => {
-                alert("Portal do Aluno está sendo desenvolvido e brevemente estará disponível!");
-              }}
+              onClick={() => setIsPortalModalOpen(true)}
               variant="outline"
               className="border-angola-blue text-angola-blue hover:bg-angola-blue hover:text-white"
             >
@@ -126,7 +126,7 @@ export default function Navigation() {
             </button>
             <button 
               onClick={() => {
-                alert("Portal do Aluno está sendo desenvolvido e brevemente estará disponível!");
+                setIsPortalModalOpen(true);
                 setIsMobileMenuOpen(false);
               }}
               className="block px-3 py-2 text-angola-blue font-semibold w-full text-left"
@@ -136,6 +136,11 @@ export default function Navigation() {
           </div>
         </div>
       )}
+      
+      <StudentPortalModal 
+        isOpen={isPortalModalOpen} 
+        onClose={() => setIsPortalModalOpen(false)} 
+      />
     </nav>
   );
 }
