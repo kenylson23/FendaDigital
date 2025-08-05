@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/language-context";
 
-export default function NewsSection() {
+export default function NewsSection() {  
+  const { t } = useLanguage();
+  
   const articles = [
     {
       date: "15 de Janeiro, 2024",
@@ -37,9 +40,9 @@ export default function NewsSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Notícias e Eventos</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">{t('news.title')}</h2>
           <p className="text-xl text-gray-600">
-            Fique por dentro das últimas novidades da nossa escola.
+            {t('news.subtitle')}
           </p>
         </motion.div>
         
@@ -65,7 +68,7 @@ export default function NewsSection() {
                 <h3 className="text-xl font-bold text-gray-900 mb-3">{article.title}</h3>
                 <p className="text-gray-600 mb-4">{article.description}</p>
                 <button className="text-angola-blue font-semibold hover:underline">
-                  Ler mais
+                  {t('news.btn_ler_mais')}
                 </button>
               </div>
             </motion.article>

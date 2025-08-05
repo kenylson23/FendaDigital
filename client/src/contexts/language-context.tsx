@@ -115,6 +115,44 @@ const translations = {
     'tuition.valor_base': 'Valor Base',
     'tuition.desconto_total': 'Desconto Total',
     'tuition.valor_final': 'Valor Final',
+    
+    // Visit Scheduler
+    'visit.title': 'Agendar Visita',
+    'visit.subtitle': 'Venha conhecer nossa escola pessoalmente',
+    'visit.nome': 'Nome Completo',
+    'visit.email': 'Email',
+    'visit.telefone': 'Telefone',
+    'visit.data': 'Data da Visita',
+    'visit.horario': 'Horário',
+    'visit.tipo': 'Tipo de Visita',
+    'visit.tour_instalacoes': 'Tour pelas Instalações',
+    'visit.reuniao_direcao': 'Reunião com a Direção',
+    'visit.processo_matricula': 'Processo de Matrícula',
+    'visit.tamanho_grupo': 'Tamanho do Grupo',
+    'visit.observacoes': 'Observações Especiais',
+    'visit.agendar': 'Agendar Visita',
+    'visit.sucesso': 'Visita Agendada!',
+    'visit.erro': 'Erro ao Agendar',
+    
+    // Contact Form Additional
+    'contact.assunto': 'Assunto',
+    'contact.admissao': 'Admissão',
+    'contact.informacoes': 'Informações Gerais',
+    'contact.outro': 'Outro',
+    'contact.localizacao': 'Localização',
+    'contact.horario': 'Horário de Funcionamento',
+    'contact.horario_desc': 'Segunda - Sexta: 7:00 - 17:00',
+    'contact.sabado': 'Sábado: 8:00 - 12:00',
+    
+    // Virtual Tour Buttons
+    'tour.salas_aula': 'Salas de Aula',
+    'tour.laboratorios': 'Laboratórios',
+    'tour.biblioteca': 'Biblioteca',
+    'tour.desportos': 'Desportos',
+    'tour.iniciar': 'Iniciar Tour Virtual',
+    
+    // News Articles
+    'news.btn_ler_mais': 'Ler mais',
   },
   zh: {
     // Navigation
@@ -222,6 +260,44 @@ const translations = {
     'tuition.valor_base': '基础价值',
     'tuition.desconto_total': '总折扣',
     'tuition.valor_final': '最终价值',
+    
+    // Visit Scheduler
+    'visit.title': '预约参观',
+    'visit.subtitle': '欢迎亲自了解我们的学校',
+    'visit.nome': '全名',
+    'visit.email': '电子邮件',
+    'visit.telefone': '电话',
+    'visit.data': '参观日期',
+    'visit.horario': '时间',
+    'visit.tipo': '参观类型',
+    'visit.tour_instalacoes': '设施参观',
+    'visit.reuniao_direcao': '与管理层会面',
+    'visit.processo_matricula': '报名流程',
+    'visit.tamanho_grupo': '团体规模',
+    'visit.observacoes': '特殊要求',
+    'visit.agendar': '预约参观',
+    'visit.sucesso': '参观已预约！',
+    'visit.erro': '预约错误',
+    
+    // Contact Form Additional
+    'contact.assunto': '主题',
+    'contact.admissao': '入学',
+    'contact.informacoes': '一般信息',
+    'contact.outro': '其他',
+    'contact.localizacao': '位置',
+    'contact.horario': '营业时间',
+    'contact.horario_desc': '周一至周五：7:00 - 17:00',
+    'contact.sabado': '周六：8:00 - 12:00',
+    
+    // Virtual Tour Buttons
+    'tour.salas_aula': '教室',
+    'tour.laboratorios': '实验室',
+    'tour.biblioteca': '图书馆',
+    'tour.desportos': '体育',
+    'tour.iniciar': '开始虚拟参观',
+    
+    // News Articles
+    'news.btn_ler_mais': '阅读更多',
   }
 };
 

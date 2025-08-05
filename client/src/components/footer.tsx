@@ -1,6 +1,9 @@
 import { GraduationCap, Facebook, Instagram, Linkedin, Youtube, MapPin, Phone, Mail } from "lucide-react";
+import { useLanguage } from "@/contexts/language-context";
 
 export default function Footer() {
+  const { t } = useLanguage();
+  
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -18,7 +21,7 @@ export default function Footer() {
               <span className="text-xl font-bold">Fenda da Tundavala</span>
             </div>
             <p className="text-gray-400 mb-4">
-              Educação de excelência conectando Angola e China através do conhecimento e cultura.
+              {t('footer.descricao')}
             </p>
             <div className="flex space-x-4">
               <button className="text-gray-400 hover:text-china-yellow transition-colors">
@@ -37,14 +40,14 @@ export default function Footer() {
           </div>
           
           <div>
-            <h3 className="text-lg font-semibold mb-4">Links Rápidos</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('footer.links_rapidos')}</h3>
             <ul className="space-y-2">
               <li>
                 <button 
                   onClick={() => scrollToSection("home")}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
-                  Início
+                  {t('nav.inicio')}
                 </button>
               </li>
               <li>
@@ -52,7 +55,7 @@ export default function Footer() {
                   onClick={() => scrollToSection("about")}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
-                  Sobre
+                  {t('nav.sobre')}
                 </button>
               </li>
               <li>
@@ -60,7 +63,7 @@ export default function Footer() {
                   onClick={() => scrollToSection("programs")}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
-                  Programas
+                  {t('nav.programas')}
                 </button>
               </li>
               <li>
@@ -68,7 +71,7 @@ export default function Footer() {
                   onClick={() => scrollToSection("tour")}
                   className="text-gray-400 hover:text-white transition-colors"
                 >
-                  Tour Virtual
+                  {t('nav.tour')}
                 </button>
               </li>
             </ul>

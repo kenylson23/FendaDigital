@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
+import { useLanguage } from "@/contexts/language-context";
 
 export default function GallerySection() {
+  const { t } = useLanguage();
+  
   const images = [
     {
       src: "https://pixabay.com/get/gc0ecf312e7d9c4f951c80e4839d398522080dec726d1ec826794f427aaa092cc548aa6c14848f73873bca4b464f8411bc3eb2fab1149f134125f433f7ca3080b_1280.jpg",
@@ -45,9 +48,9 @@ export default function GallerySection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Galeria</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">{t('gallery.title')}</h2>
           <p className="text-xl text-gray-600">
-            Momentos especiais da nossa comunidade escolar.
+            {t('gallery.subtitle')}
           </p>
         </motion.div>
         

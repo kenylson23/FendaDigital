@@ -33,10 +33,10 @@ export default function VirtualTour() {
   };
 
   const tourButtons = [
-    { key: "classroom", label: "Salas de Aula", color: "bg-angola-blue hover:bg-blue-700" },
-    { key: "laboratory", label: "Laboratórios", color: "bg-china-yellow hover:bg-yellow-600" },
-    { key: "library", label: "Biblioteca", color: "bg-green-500 hover:bg-green-600" },
-    { key: "sports", label: "Desportos", color: "bg-red-500 hover:bg-red-600" }
+    { key: "classroom", label: t('tour.salas_aula'), color: "bg-angola-blue hover:bg-blue-700" },
+    { key: "laboratory", label: t('tour.laboratorios'), color: "bg-china-yellow hover:bg-yellow-600" },
+    { key: "library", label: t('tour.biblioteca'), color: "bg-green-500 hover:bg-green-600" },
+    { key: "sports", label: t('tour.desportos'), color: "bg-red-500 hover:bg-red-600" }
   ];
 
   return (
@@ -82,7 +82,7 @@ export default function VirtualTour() {
                   size="lg"
                 >
                   <Play className="mr-2" size={24} />
-                  Iniciar Tour Virtual
+                  {t('tour.iniciar')}
                 </Button>
               </motion.div>
             </div>

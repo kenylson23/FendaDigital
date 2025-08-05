@@ -69,35 +69,35 @@ export default function ContactSection() {
   const contactInfo = [
     {
       icon: MapPin,
-      title: "Localização",
+      title: t('contact.localizacao'),
       content: ["Fenda da Tundavala, Huíla", "Angola"],
       color: "bg-china-yellow"
     },
     {
       icon: Phone,
-      title: "Telefone",
+      title: t('contact.telefone'),
       content: ["+244 123 456 789", "+244 987 654 321"],
       color: "bg-china-yellow"
     },
     {
       icon: Mail,
-      title: "Email",
+      title: t('contact.email'),
       content: ["info@fendatundavala.edu.ao", "admissoes@fendatundavala.edu.ao"],
       color: "bg-china-yellow"
     },
     {
       icon: Clock,
-      title: "Horário de Funcionamento",
-      content: ["Segunda - Sexta: 7:00 - 17:00", "Sábado: 8:00 - 12:00"],
+      title: t('contact.horario'),
+      content: [t('contact.horario_desc'), t('contact.sabado')],
       color: "bg-china-yellow"
     }
   ];
 
   const subjectOptions = [
-    { value: "admissao", label: "Admissão" },
-    { value: "informacoes", label: "Informações Gerais" },
-    { value: "intercambio", label: "Programa de Intercâmbio" },
-    { value: "outro", label: "Outro" }
+    { value: "admissao", label: t('contact.admissao') },
+    { value: "informacoes", label: t('contact.informacoes') },
+    { value: "intercambio", label: t('contact.intercambio') },
+    { value: "outro", label: t('contact.outro') }
   ];
 
   return (
@@ -154,7 +154,7 @@ export default function ContactSection() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <Label className="text-sm font-medium text-gray-700">Nome Completo *</Label>
+                  <Label className="text-sm font-medium text-gray-700">{t('contact.nome')} *</Label>
                   <Input
                     type="text"
                     value={formData.name}
@@ -164,7 +164,7 @@ export default function ContactSection() {
                   />
                 </div>
                 <div>
-                  <Label className="text-sm font-medium text-gray-700">Email *</Label>
+                  <Label className="text-sm font-medium text-gray-700">{t('contact.email')} *</Label>
                   <Input
                     type="email"
                     value={formData.email}
@@ -177,7 +177,7 @@ export default function ContactSection() {
               
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <Label className="text-sm font-medium text-gray-700">Telefone</Label>
+                  <Label className="text-sm font-medium text-gray-700">{t('contact.telefone')}</Label>
                   <Input
                     type="tel"
                     value={formData.phone}
@@ -186,7 +186,7 @@ export default function ContactSection() {
                   />
                 </div>
                 <div>
-                  <Label className="text-sm font-medium text-gray-700">Assunto *</Label>
+                  <Label className="text-sm font-medium text-gray-700">{t('contact.assunto')} *</Label>
                   <Select value={formData.subject} onValueChange={(value) => setFormData(prev => ({ ...prev, subject: value }))}>
                     <SelectTrigger className="mt-1">
                       <SelectValue placeholder="Selecione um assunto" />
@@ -203,7 +203,7 @@ export default function ContactSection() {
               </div>
               
               <div>
-                <Label className="text-sm font-medium text-gray-700">Mensagem *</Label>
+                <Label className="text-sm font-medium text-gray-700">{t('contact.mensagem')} *</Label>
                 <Textarea
                   rows={4}
                   value={formData.message}
@@ -219,7 +219,7 @@ export default function ContactSection() {
                 className="w-full bg-angola-blue hover:bg-blue-700"
                 size="lg"
               >
-                {contactMutation.isPending ? "Enviando..." : "Enviar Mensagem"}
+                {contactMutation.isPending ? "Enviando..." : t('contact.enviar')}
               </Button>
             </form>
           </motion.div>

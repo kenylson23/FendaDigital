@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { useLanguage } from "@/contexts/language-context";
 import { queryClient } from "@/lib/queryClient";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,6 +27,7 @@ const timeSlots = [
 ];
 
 export default function VisitScheduler() {
+  const { t } = useLanguage();
   const { toast } = useToast();
   const [isSubmitted, setIsSubmitted] = useState(false);
 
