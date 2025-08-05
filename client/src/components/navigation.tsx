@@ -1,13 +1,51 @@
-import { useState } from "react";
-import { GraduationCap, Menu, X, Calendar } from "lucide-react";
+import { useState, useEffect } from "react";
+import { GraduationCap, Menu, X, Calendar, Home, Info, BookOpen, Calculator, Camera, Mail, User, Search, ChevronDown, Globe, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "wouter";
+import { motion, AnimatePresence } from "framer-motion";
 import StudentPortalModal from "@/components/student-portal-modal";
+
+// Navigation Button Component
+const NavButton = ({ icon: Icon, label, onClick }: { icon: any, label: string, onClick?: () => void }) => (
+  <motion.button
+    onClick={onClick}
+    whileHover={{ scale: 1.05, y: -2 }}
+    whileTap={{ scale: 0.95 }}
+    className="flex items-center gap-2 px-4 py-2 rounded-full text-gray-700 dark:text-gray-300 hover:text-angola-blue dark:hover:text-china-yellow hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300 font-medium"
+  >
+    <Icon className="h-4 w-4" />
+    <span className="text-sm">{label}</span>
+  </motion.button>
+);
+
+// Mobile Navigation Button Component
+const MobileNavButton = ({ icon: Icon, label, onClick }: { icon: any, label: string, onClick?: () => void }) => (
+  <motion.button
+    onClick={onClick}
+    whileHover={{ scale: 1.02 }}
+    whileTap={{ scale: 0.98 }}
+    className="w-full flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:text-angola-blue dark:hover:text-china-yellow hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-all duration-300 font-medium"
+  >
+    <Icon className="h-5 w-5" />
+    <span>{label}</span>
+  </motion.button>
+);
 
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isPortalModalOpen, setIsPortalModalOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [location] = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -18,173 +56,229 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="bg-white shadow-lg fixed w-full top-0 z-50">
+    <motion.nav 
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className={`fixed w-full top-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-xl border-b border-gray-200/20 dark:border-gray-700/20' 
+          : 'bg-white dark:bg-gray-900 shadow-lg'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex items-center">
-            <div className="flex-shrink-0 flex items-center">
-              <GraduationCap className="text-2xl text-angola-blue mr-3" size={32} />
-              <span className="text-xl font-bold text-gray-900">Fenda da Tundavala</span>
-            </div>
-          </div>
+        <div className="flex justify-between items-center h-20">
+          <motion.div 
+            className="flex items-center"
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          >
+            <Link href="/" className="flex items-center group">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-angola-blue to-china-yellow rounded-full blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300"></div>
+                <GraduationCap className="relative text-angola-blue group-hover:text-china-yellow transition-colors duration-300" size={40} />
+              </div>
+              <div className="ml-3">
+                <span className="text-xl font-bold bg-gradient-to-r from-angola-blue to-china-yellow bg-clip-text text-transparent">
+                  Fenda da Tundavala
+                </span>
+                <div className="text-xs text-gray-500 dark:text-gray-400 -mt-1">
+                  Escola Angola-China
+                </div>
+              </div>
+            </Link>
+          </motion.div>
           
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-2">
             {location === "/" ? (
               <>
-                <button 
-                  onClick={() => scrollToSection("home")}
-                  className="text-gray-700 hover:text-angola-blue transition-colors"
-                >
-                  Início
-                </button>
-                <button 
-                  onClick={() => scrollToSection("about")}
-                  className="text-gray-700 hover:text-angola-blue transition-colors"
-                >
-                  Sobre
-                </button>
-                <button 
-                  onClick={() => scrollToSection("programs")}
-                  className="text-gray-700 hover:text-angola-blue transition-colors"
-                >
-                  Programas
-                </button>
-                <button 
-                  onClick={() => scrollToSection("calculator")}
-                  className="text-gray-700 hover:text-angola-blue transition-colors"
-                >
-                  Mensalidades
-                </button>
-                <button 
-                  onClick={() => scrollToSection("tour")}
-                  className="text-gray-700 hover:text-angola-blue transition-colors"
-                >
-                  Tour Virtual
-                </button>
-                <Button 
-                  onClick={() => scrollToSection("contact")}
-                  className="bg-angola-blue text-white hover:bg-blue-700"
-                >
-                  Contato
-                </Button>
+                <NavButton icon={Home} label="Início" onClick={() => scrollToSection("home")} />
+                <NavButton icon={Info} label="Sobre" onClick={() => scrollToSection("about")} />
+                <NavButton icon={BookOpen} label="Programas" onClick={() => scrollToSection("programs")} />
+                <NavButton icon={Calculator} label="Mensalidades" onClick={() => scrollToSection("calculator")} />
+                <NavButton icon={Camera} label="Tour Virtual" onClick={() => scrollToSection("tour")} />
+                <NavButton icon={Mail} label="Contato" onClick={() => scrollToSection("contact")} />
               </>
             ) : (
               <Link href="/">
-                <Button variant="ghost" className="text-gray-700 hover:text-angola-blue">
-                  ← Voltar ao Início
-                </Button>
+                <NavButton icon={Home} label="← Início" />
               </Link>
             )}
+          </div>
+
+          {/* Action Buttons */}
+          <div className="hidden md:flex items-center space-x-3">
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Link href="/agendar-visita">
+                <Button className="bg-gradient-to-r from-angola-blue to-china-yellow text-white hover:from-blue-700 hover:to-yellow-600 transition-all duration-300 shadow-lg hover:shadow-xl rounded-full px-6 py-2.5 font-semibold">
+                  <Calendar className="mr-2 h-4 w-4" />
+                  Agendar Visita
+                </Button>
+              </Link>
+            </motion.div>
             
-            <Link href="/agendar-visita">
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Button 
+                onClick={() => setIsPortalModalOpen(true)}
                 variant="outline"
-                className="border-china-yellow text-china-yellow hover:bg-china-yellow hover:text-black flex items-center gap-2"
+                className="border-2 border-angola-blue text-angola-blue hover:bg-angola-blue hover:text-white transition-all duration-300 rounded-full px-6 py-2.5 font-semibold"
               >
-                <Calendar className="h-4 w-4" />
-                Agendar Visita
+                <User className="mr-2 h-4 w-4" />
+                Portal
               </Button>
-            </Link>
-            
-            <Button 
-              onClick={() => setIsPortalModalOpen(true)}
-              variant="outline"
-              className="border-angola-blue text-angola-blue hover:bg-angola-blue hover:text-white"
-            >
-              Portal do Aluno
-            </Button>
+            </motion.div>
+
+            {/* Additional Action Buttons */}
+            <div className="flex items-center space-x-2 ml-2 pl-2 border-l border-gray-200 dark:border-gray-700">
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                title="Pesquisar"
+              >
+                <Search className="h-4 w-4 text-gray-600 dark:text-gray-300" />
+              </motion.button>
+
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                className="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                title="Idioma"
+              >
+                <Globe className="h-4 w-4 text-gray-600 dark:text-gray-300" />
+              </motion.button>
+
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={() => setIsDarkMode(!isDarkMode)}
+                className="p-2.5 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                title="Alternar tema"
+              >
+                {isDarkMode ? (
+                  <Sun className="h-4 w-4 text-yellow-500" />
+                ) : (
+                  <Moon className="h-4 w-4 text-gray-600" />
+                )}
+              </motion.button>
+            </div>
           </div>
           
+          {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
-            <Button
-              variant="ghost"
-              size="sm"
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </Button>
+              <motion.div
+                animate={{ rotate: isMobileMenuOpen ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </motion.div>
+            </motion.button>
           </div>
         </div>
       </div>
       
       {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-white border-t">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            {location === "/" ? (
-              <>
-                <button 
-                  onClick={() => scrollToSection("home")}
-                  className="block px-3 py-2 text-gray-700 w-full text-left"
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="md:hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-gray-200/20 dark:border-gray-700/20 overflow-hidden"
+          >
+            <div className="px-4 py-6 space-y-2">
+              {location === "/" ? (
+                <>
+                  <MobileNavButton icon={Home} label="Início" onClick={() => scrollToSection("home")} />
+                  <MobileNavButton icon={Info} label="Sobre" onClick={() => scrollToSection("about")} />
+                  <MobileNavButton icon={BookOpen} label="Programas" onClick={() => scrollToSection("programs")} />
+                  <MobileNavButton icon={Calculator} label="Mensalidades" onClick={() => scrollToSection("calculator")} />
+                  <MobileNavButton icon={Camera} label="Tour Virtual" onClick={() => scrollToSection("tour")} />
+                  <MobileNavButton icon={Mail} label="Contato" onClick={() => scrollToSection("contact")} />
+                </>
+              ) : (
+                <Link href="/">
+                  <MobileNavButton icon={Home} label="← Voltar ao Início" />
+                </Link>
+              )}
+              
+              <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-4">
+                <Link href="/agendar-visita">
+                  <motion.button 
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-angola-blue to-china-yellow text-white rounded-xl font-semibold shadow-lg"
+                  >
+                    <Calendar className="h-5 w-5" />
+                    Agendar Visita
+                  </motion.button>
+                </Link>
+                
+                <motion.button 
+                  onClick={() => {
+                    setIsPortalModalOpen(true);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full flex items-center gap-3 px-4 py-3 mt-3 border-2 border-angola-blue text-angola-blue rounded-xl font-semibold hover:bg-angola-blue hover:text-white transition-colors"
                 >
-                  Início
-                </button>
-                <button 
-                  onClick={() => scrollToSection("about")}
-                  className="block px-3 py-2 text-gray-700 w-full text-left"
+                  <User className="h-5 w-5" />
+                  Portal do Aluno
+                </motion.button>
+              </div>
+
+              {/* Mobile Action Buttons */}
+              <div className="flex justify-center gap-4 pt-4 border-t border-gray-200 dark:border-gray-700 mt-4">
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                  title="Pesquisar"
                 >
-                  Sobre
-                </button>
-                <button 
-                  onClick={() => scrollToSection("programs")}
-                  className="block px-3 py-2 text-gray-700 w-full text-left"
+                  <Search className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+                </motion.button>
+
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                  title="Idioma"
                 >
-                  Programas
-                </button>
-                <button 
-                  onClick={() => scrollToSection("calculator")}
-                  className="block px-3 py-2 text-gray-700 w-full text-left"
+                  <Globe className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+                </motion.button>
+
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  onClick={() => setIsDarkMode(!isDarkMode)}
+                  className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                  title="Alternar tema"
                 >
-                  Mensalidades
-                </button>
-                <button 
-                  onClick={() => scrollToSection("tour")}
-                  className="block px-3 py-2 text-gray-700 w-full text-left"
-                >
-                  Tour Virtual
-                </button>
-                <button 
-                  onClick={() => scrollToSection("contact")}
-                  className="block px-3 py-2 text-gray-700 w-full text-left"
-                >
-                  Contato
-                </button>
-              </>
-            ) : (
-              <Link href="/">
-                <button className="block px-3 py-2 text-gray-700 w-full text-left">
-                  ← Voltar ao Início
-                </button>
-              </Link>
-            )}
-            
-            <Link href="/agendar-visita">
-              <button 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center gap-2 px-3 py-2 text-china-yellow font-semibold w-full text-left"
-              >
-                <Calendar className="h-4 w-4" />
-                Agendar Visita
-              </button>
-            </Link>
-            
-            <button 
-              onClick={() => {
-                setIsPortalModalOpen(true);
-                setIsMobileMenuOpen(false);
-              }}
-              className="block px-3 py-2 text-angola-blue font-semibold w-full text-left"
-            >
-              Portal do Aluno
-            </button>
-          </div>
-        </div>
-      )}
+                  {isDarkMode ? (
+                    <Sun className="h-5 w-5 text-yellow-500" />
+                  ) : (
+                    <Moon className="h-5 w-5 text-gray-600" />
+                  )}
+                </motion.button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       
       <StudentPortalModal 
         isOpen={isPortalModalOpen} 
         onClose={() => setIsPortalModalOpen(false)} 
       />
-    </nav>
+    </motion.nav>
   );
 }
