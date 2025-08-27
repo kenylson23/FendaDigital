@@ -64,7 +64,6 @@ const translations = {
     // Footer
     'footer.descricao': 'Conectando Angola e China através da educação de excelência.',
     'footer.links_rapidos': 'Links Rápidos',
-    'footer.contato': 'Contato',
     'footer.seguir': 'Siga-nos',
     'footer.direitos': 'Todos os direitos reservados.',
     
@@ -171,7 +170,6 @@ const translations = {
     
     // Footer Sections
     'footer.programas': 'Programas',
-    'footer.contato': 'Contato',
     'footer.ensino_primario': 'Ensino Primário',
     'footer.ensino_secundario': 'Ensino Secundário',
     'footer.intercambio_angola_china': 'Intercâmbio Angola-China',
@@ -251,7 +249,6 @@ const translations = {
     // Footer
     'footer.descricao': '通过优质教育连接安哥拉和中国。',
     'footer.links_rapidos': '快速链接',
-    'footer.contato': '联系方式',
     'footer.seguir': '关注我们',
     'footer.direitos': '版权所有。',
     
@@ -358,7 +355,6 @@ const translations = {
     
     // Footer Sections
     'footer.programas': '项目',
-    'footer.contato': '联系',
     'footer.ensino_primario': '小学教育',
     'footer.ensino_secundario': '中学教育',
     'footer.intercambio_angola_china': '安哥拉-中国交流',

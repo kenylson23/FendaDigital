@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { useMutation } from "@tanstack/react-query";
 import { useLanguage } from "@/contexts/language-context";
 import { Calculator, Save, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,8 +9,21 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
-import { type TuitionResult } from "@shared/schema";
+
+// Define TuitionResult type locally for static deployment
+interface TuitionResult {
+  educationLevel: string;
+  paymentMode: string;
+  studentCount: number;
+  earlyPayment: boolean;
+  basePrice: number;
+  subtotal: number;
+  discount: number;
+  discountAmount: number;
+  finalAmount: number;
+  installmentAmount: number;
+  paymentFrequency: string;
+}
 
 export default function TuitionCalculator() {
   const { t } = useLanguage();
@@ -24,28 +36,60 @@ export default function TuitionCalculator() {
   });
   
   const [result, setResult] = useState<TuitionResult | null>(null);
+  const [isCalculating, setIsCalculating] = useState(false);
   const { toast } = useToast();
 
-  const calculateMutation = useMutation({
-    mutationFn: async (data: typeof formData) => {
-      const response = await apiRequest("POST", "/api/calculate-tuition", data);
-      return response.json();
-    },
-    onSuccess: (data: TuitionResult) => {
-      setResult(data);
-      toast({
-        title: "Cálculo realizado com sucesso!",
-        description: "Confira os valores abaixo.",
-      });
-    },
-    onError: () => {
-      toast({
-        title: "Erro no cálculo",
-        description: "Verifique os dados e tente novamente.",
-        variant: "destructive",
-      });
-    }
-  });
+  // Static calculation logic moved from backend
+  const calculateTuition = (data: typeof formData): TuitionResult => {
+    // Tuition prices (in Kwanza)
+    const basePrices = {
+      "primario": 25000,
+      "secundario": 35000,
+      "intercambio": 50000
+    };
+
+    // Payment mode discounts
+    const paymentDiscounts = {
+      "mensal": 0,
+      "trimestral": 5,
+      "semestral": 10,
+      "anual": 15
+    };
+
+    // Payment frequency multipliers
+    const paymentMultipliers = {
+      "mensal": 1,
+      "trimestral": 3,
+      "semestral": 6,
+      "anual": 12
+    };
+
+    const basePrice = basePrices[data.educationLevel as keyof typeof basePrices];
+    const paymentDiscount = paymentDiscounts[data.paymentMode as keyof typeof paymentDiscounts];
+    
+    const subtotal = basePrice * data.studentCount;
+    const earlyPaymentDiscount = data.earlyPayment ? 5 : 0;
+    const totalDiscount = paymentDiscount + earlyPaymentDiscount;
+    const discountAmount = (subtotal * totalDiscount) / 100;
+    const finalAmount = subtotal - discountAmount;
+    
+    const paymentMultiplier = paymentMultipliers[data.paymentMode as keyof typeof paymentMultipliers];
+    const installmentAmount = finalAmount * paymentMultiplier;
+
+    return {
+      educationLevel: data.educationLevel,
+      paymentMode: data.paymentMode,
+      studentCount: data.studentCount,
+      earlyPayment: data.earlyPayment,
+      basePrice,
+      subtotal,
+      discount: totalDiscount,
+      discountAmount,
+      finalAmount,
+      installmentAmount,
+      paymentFrequency: data.paymentMode
+    };
+  };
 
   const handleCalculate = () => {
     if (!formData.educationLevel) {
@@ -57,7 +101,27 @@ export default function TuitionCalculator() {
       return;
     }
     
-    calculateMutation.mutate(formData);
+    setIsCalculating(true);
+    
+    // Simulate async operation for better UX
+    setTimeout(() => {
+      try {
+        const calculationResult = calculateTuition(formData);
+        setResult(calculationResult);
+        toast({
+          title: "Cálculo realizado com sucesso!",
+          description: "Confira os valores abaixo.",
+        });
+      } catch (error) {
+        toast({
+          title: "Erro no cálculo",
+          description: "Verifique os dados e tente novamente.",
+          variant: "destructive",
+        });
+      } finally {
+        setIsCalculating(false);
+      }
+    }, 500);
   };
 
   const levelOptions = [
@@ -167,12 +231,12 @@ export default function TuitionCalculator() {
               
               <Button 
                 onClick={handleCalculate}
-                disabled={calculateMutation.isPending}
+                disabled={isCalculating}
                 className="w-full bg-angola-blue hover:bg-blue-700"
                 size="lg"
               >
                 <Calculator className="mr-2" size={20} />
-                {calculateMutation.isPending ? t('loading.calculando') : t('tuition.calcular_mensalidade')}
+                {isCalculating ? t('loading.calculando') : t('tuition.calcular_mensalidade')}
               </Button>
             </div>
             
