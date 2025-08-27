@@ -17,15 +17,15 @@ Este projeto foi configurado para deploy estático no Netlify.
 ### 3. Configuração do Netlify
 
 #### Opção 1: Upload Manual
-1. Execute: `npm run build` ou `vite build`
+1. Execute: `vite build`
 2. Faça upload da pasta `dist/public` no Netlify
 
 #### Opção 2: Conectar Repositório Git
 1. Conecte seu repositório no Netlify
-2. Configure:
+2. O arquivo `netlify.toml` já está configurado com:
    - Build command: `vite build`
    - Publish directory: `dist/public`
-3. O arquivo `netlify.toml` já está configurado
+   - Redirects para SPA routing
 
 ## Funcionalidades que Funcionam Estaticamente
 
