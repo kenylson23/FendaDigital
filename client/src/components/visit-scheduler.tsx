@@ -1,10 +1,22 @@
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
 import { useLanguage } from "@/contexts/language-context";
-import { queryClient } from "@/lib/queryClient";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { visitAppointmentRequestSchema, type VisitAppointmentRequest } from "@shared/schema";
+import { z } from "zod";
+
+// Define schema locally for static deployment
+const visitAppointmentRequestSchema = z.object({
+  name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
+  email: z.string().email("Email inválido"),
+  phone: z.string().min(9, "Telefone inválido"),
+  visitDate: z.string().min(1, "Data é obrigatória"),
+  visitTime: z.string().min(1, "Horário é obrigatório"),
+  visitType: z.string(),
+  groupSize: z.number().min(1).max(20),
+  specialRequests: z.string().optional()
+});
+
+type VisitAppointmentRequest = z.infer<typeof visitAppointmentRequestSchema>;
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -45,41 +57,22 @@ export default function VisitScheduler() {
     }
   });
 
-  const mutation = useMutation({
-    mutationFn: async (data: VisitAppointmentRequest) => {
-      const response = await fetch("/api/visit-appointments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      });
-      
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || t('visit.erro_agendar_visita'));
-      }
-      
-      return response.json();
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/visit-appointments"] });
+  // Static demo - no backend submission
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const onSubmit = (data: VisitAppointmentRequest) => {
+    setIsSubmitting(true);
+    
+    // Simulate form submission for demo purposes
+    setTimeout(() => {
       setIsSubmitted(true);
+      setIsSubmitting(false);
       toast({
         title: t('visit.visita_agendada'),
         description: t('visit.solicitacao_recebida'),
       });
       form.reset();
-    },
-    onError: (error: Error) => {
-      toast({
-        title: t('visit.erro_ao_agendar'),
-        description: error.message,
-        variant: "destructive",
-      });
-    }
-  });
-
-  const onSubmit = (data: VisitAppointmentRequest) => {
-    mutation.mutate(data);
+    }, 1000);
   };
 
   // Get tomorrow's date as minimum selectable date
@@ -477,9 +470,9 @@ export default function VisitScheduler() {
                 <Button 
                   type="submit" 
                   className="w-full bg-gradient-to-r from-angola-blue to-china-yellow text-white font-semibold py-3 rounded-lg hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl" 
-                  disabled={mutation.isPending}
+                  disabled={isSubmitting}
                 >
-                  {mutation.isPending ? (
+                  {isSubmitting ? (
                     <div className="flex items-center gap-2">
                       <div className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></div>
                       Agendando...
